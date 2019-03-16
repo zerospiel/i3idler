@@ -1,0 +1,43 @@
+#!/bin/bash
+
+_suspender() {
+    case $1 in
+        bat)
+            pgrep xautolock && pkill xautolock
+            # lock after 5 minutes
+            xset s on; xset s 300
+            # screen off after 10 minutes
+            xset dpms 0 0 600
+            # suspend after 15 minutes
+            xautolock -time 15 -locker "systemctl suspend" & > /dev/null 2>&1
+        ;;
+        adp)
+            pgrep xautolock && pkill xautolock
+            xset s on; xset s 600
+            xset dpms 0 0 900
+            xautolock -time 30 -locker "systemctl suspend" & > /dev/null 2>&1
+        ;;
+    esac
+}
+
+[ ! -f /usr/bin/xautolock ] && echo "install xautolock" && exit 1
+
+case "$1" in
+    ac_adapter)
+        case "$2" in
+            AC*|ADP0)
+                case "$4" in
+                    00000000)
+                        _suspender bat
+                        ;;
+                    00000001)
+			            _suspender adp
+                        ;;
+                esac
+                ;;
+            *)
+                logger "ACPI action undefined: $2; $3; $4"
+                ;;
+        esac
+        ;;
+esac
