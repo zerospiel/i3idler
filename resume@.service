@@ -1,0 +1,13 @@
+[Unit]
+Description=User resume actions
+After=suspend.target
+
+[Service]
+User=%I
+Type=simple
+KillMode=process
+Environment=DISPLAY=:0
+ExecStart=/usr/local/bin/achecker 
+
+[Install]
+WantedBy=suspend.target
