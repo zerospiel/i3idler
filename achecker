@@ -2,6 +2,9 @@
 
 # start me in your autostart, e.g. .xinitrc
 
+[[ ! -f /usr/bin/xautolock ]] && echo "xuatolock is required" && exit 0
+[[ ! -f /usr/bin/xset ]] && echo "xset is required" && exit 0
+
 _suspender() {
     case $1 in
         bat)

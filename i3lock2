@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[[ ! -f /usr/bin/scrot ]] && echo "install scrot"
-[[ ! -f /usr/bin/convert ]] && echo "install imagemagick"
+[[ ! -f /usr/bin/scrot ]] && echo "install scrot" && exit 0
+[[ ! -f /usr/bin/convert ]] && echo "install imagemagick" && exit 0
 
 scrot /tmp/screen_locked.png
 convert /tmp/screen_locked.png -gravity North -font Noto-Sans-Display-Bold -fill "#e866d6" -pointsize 170 -annotate +0+150 'LOCKED' /tmp/screen_locked.png

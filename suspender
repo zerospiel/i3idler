@@ -1,5 +1,8 @@
 #!/bin/bash
 
+[[ ! -f /usr/bin/xautolock ]] && echo "xuatolock is required" && exit 0
+[[ ! -f /usr/bin/xset ]] && echo "xset is required" && exit 0
+
 _suspender() {
     case $1 in
         bat)

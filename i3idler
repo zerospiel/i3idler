@@ -1,5 +1,7 @@
 #!/bin/bash
 
+[[ ! -f /usr/bin/acpi ]] && echo "no acpi" && exit 0
+
 coproc acpi_listen
 trap 'kill $COPROC_PID' EXIT
 
